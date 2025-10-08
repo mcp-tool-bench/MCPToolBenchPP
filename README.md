@@ -4,10 +4,16 @@
 
 [![MCP Marketplace User Review Rating Badge](https://www.deepnlp.org/api/marketplace/svg?name=mcp-tool-bench/mcptoolbenchpp)](https://www.deepnlp.org/store/ai-agent/benchmark/pub-mcp-tool-bench/mcptoolbenchp)[![AI Agent Marketplace DeepNLP](https://www.deepnlp.org/api/ai_agent_marketplace/svg?name=mcp-tool-bench/mcptoolbenchpp)](https://www.deepnlp.org/store/ai-agent/benchmark/pub-mcp-tool-bench/mcptoolbenchpp) 
 
+**Introduction**
 
 MCPToolBench++ is a large-scale, multi-domain AI Agent Tool Use Benchmark. As of July 2025, this benchmark includes over 4k+ MCP Servers from more than 45 categories collected from the MCP and GitHub communities. The dataset comprises both single-step and multi-step tool calls across different categories.
 
 Notice: This repo benchmark is still WIP and more domain dataset will be released.
+
+
+**News**
+
+[2025-10-08] Add OneKey MCP Router Support: [GitHub](https://github.com/AI-Agent-Hub/mcp-marketplace/tree/main/app/onekey_mcp_router) and generate OneKey from [website](https://www.deepnlp.org/agent/onekey-mcp-router). Use OneKey MCP Router to simplify registration and access many commercial MCPs (Google Maps,Google Search,etc.)
 
 
 ## Performance Leaderboard
@@ -270,6 +276,30 @@ ANTHROPIC_API_KEY=...
 GOOGLE_API_KEY=...
 MISTRAL_API_KEY=...
 KIMI_API_KEY=...
+DEEPNLP_ONEKEY_ROUTER_ACCESS=....
+```
+
+
+**MCP OneKey Router** 
+
+OneKey Router Support [GitHub](https://github.com/AI-Agent-Hub/mcp-marketplace/tree/main/app/onekey_mcp_router), and generate Keys in [MCP OneKey Router Website](https://www.deepnlp.org/agent/onekey-mcp-router) website.
+
+Use OneKey MCP Router to simplified MCP access key registration and use one key to access Google Maps,Google Search,Tavily,Firecrawl,Bing Search,Bing Image Search and more MCPs for Benchmarking and daily use.
+
+Google Maps Example:
+
+```
+export DEEPNLP_ONEKEY_ROUTER_ACCESS=BETA_TEST_KEY_OCT_2025 
+```
+
+```txt
+{
+	"mcpServers": {
+		"deepnlp-onekey-google-maps": {
+			"url": "https://agent.deepnlp.org/mcp?server_name=google-maps&onekey={DEEPNLP_ONEKEY_ROUTER_ACCESS}"
+		},
+	}
+}
 ```
 
 #### Setup Client MCP Marketplace Admin and Start Servers
