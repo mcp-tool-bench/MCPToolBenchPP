@@ -13,7 +13,7 @@ Notice: This repo benchmark is still WIP and more domain dataset will be release
 
 **News**
 
-[2025-10-08] Add OneKey MCP Router Support: [GitHub](https://github.com/AI-Agent-Hub/mcp-marketplace/tree/main/app/onekey_mcp_router) and generate OneKey from [website](https://www.deepnlp.org/agent/onekey-mcp-router). Use OneKey MCP Router to simplify registration and access many commercial MCPs (Google Maps,Google Search,etc.)
+[2025-10-08] Add OneKey MCP Router Support in MCP Benchmark: Use OneKey MCP Proxy Router to simplify registration and use one access key to various commercial MCPs. See detailed list in [GitHub](https://github.com/aiagenta2z/onekey_mcp_router)  (e.g. Google Maps,Google Search, Perplexity, Firecrawl, etc) and generate OneKey from [website](https://www.deepnlp.org/agent/onekey-mcp-router). 
 
 
 ## Performance Leaderboard
@@ -245,6 +245,39 @@ python3 run.py --stage tool_call --input_file ./data/finance/finance_0724_single
 
 #### Install
 
+| Method                              | Description                                             |
+|-------------------------------------|---------------------------------------------------------|
+| Install pypi package and cmd `mcpm` | Use CLI to start MCP Client using local mcp_config.json |
+| Install from source                 | -                                                       |
+
+
+**Install from pypi `mcpm`**
+
+Install from pypi and start the mcp-client with config
+```
+## Basic Usage MCP Index and Search
+pip install mcp-marketplace
+
+## MCPClient Supports User Defined mcp_config.json, Just Like Other Clients Cursor/Claude
+pip install mcp-marketplace[mcp_tool_use] 
+```
+
+The CLI 'mcpm' will be in python path
+```
+## default
+mcpm run
+## set client and port
+mcpm run --host 0.0.0.0 --port 5000
+
+## Use Local Config File
+cd python/tests
+mcpm run --port 5000 --config "./mcp_config_onekey.json"
+mcpm run --port 5000 --config "./mcp_config.json"
+```
+Then you can visit http://0.0.0.0:5000 for web console and http://0.0.0.0:5000/mcp for mcp management
+
+**Install from source**
+
 Clone the repo https://github.com/mcp-tool-bench/MCPToolBenchPP
 
 ```
@@ -254,12 +287,13 @@ git clone https://github.com/mcp-tool-bench/MCPToolBenchPP
 ## clone the mcp client to execute tool call
 cd ./MCPToolBenchPP/mcp
 ## path: ./MCPToolBenchPP/mcp/mcp-marketplace
-git clone https://github.com/AI-Agent-Hub/mcp-marketplace
+git clone https://github.com/aiagenta2z/mcp-marketplace
+
 ```
 
 ### Requirements
 ```
-pip install tqdm openai anthropic
+pip install python-dotenv fastapi uvicorn[standard] asyncio openai anthropic mcp mcp-marketplace uuid httpx aiofiles anthropic Jinja2
 ```
 
 #### Setup Env Keys
@@ -282,21 +316,23 @@ DEEPNLP_ONEKEY_ROUTER_ACCESS=....
 
 **MCP OneKey Router** 
 
-OneKey Router Support [GitHub](https://github.com/AI-Agent-Hub/mcp-marketplace/tree/main/app/onekey_mcp_router), and generate Keys in [MCP OneKey Router Website](https://www.deepnlp.org/agent/onekey-mcp-router) website.
+See list of support remote pure http MCP by OneKey Router [GitHub](https://github.com/aiagenta2z/onekey_mcp_router), and generate Keys in [MCP OneKey Router Website](https://www.deepnlp.org/agent/onekey-mcp-router) website.
 
 Use OneKey MCP Router to simplified MCP access key registration and use one key to access Google Maps,Google Search,Tavily,Firecrawl,Bing Search,Bing Image Search and more MCPs for Benchmarking and daily use.
 
 Google Maps Example:
 
 ```
-export DEEPNLP_ONEKEY_ROUTER_ACCESS=BETA_TEST_KEY_OCT_2025 
+export DEEPNLP_ONEKEY_ROUTER_ACCESS={your_access_key} 
+
+## BETA_TEST_KEY_OCT_2025
 ```
 
 ```txt
 {
 	"mcpServers": {
 		"deepnlp-onekey-google-maps": {
-			"url": "https://agent.deepnlp.org/mcp?server_name=google-maps&onekey={DEEPNLP_ONEKEY_ROUTER_ACCESS}"
+			"url": "https://agent.deepnlp.org/mcp?server_name=google-maps&onekey={BETA_TEST_KEY_OCT_2025}"
 		},
 	}
 }
@@ -304,7 +340,7 @@ export DEEPNLP_ONEKEY_ROUTER_ACCESS=BETA_TEST_KEY_OCT_2025
 
 #### Setup Client MCP Marketplace Admin and Start Servers
 
-Install requirements and follow the steps in https://github.com/AI-Agent-Hub/mcp-marketplace
+Install requirements and follow the steps in https://github.com/aiagenta2z/mcp-marketplace
 
 **Start the Server**
 ```
@@ -512,7 +548,7 @@ Assistant:  Run MCP Tools  playwright_navigate(url = "https://www.wikipedia.org"
 
 ```
 cd ./MCPToolBenchPP/mcp
-git clone https://github.com/AI-Agent-Hub/mcp-marketplace.git
+git clone https://github.com/aiagenta2z/mcp-marketplace.git
 
 cd ./mcp/mcp-marketplace/app/mcp_tool_use
 uvicorn src.app:app --port 5000
