@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/mcp-tool-bench-mcptoolbenchpp-badge.png)](https://mseep.ai/app/mcp-tool-bench-mcptoolbenchpp)
+
 # MCPToolBench++: AI Agent MCP Model Context Protocol MCP Tool Use Benchmark
 
 [GitHub](https://github.com/mcp-tool-bench/MCPToolBenchPP)|[HuggingFace](https://huggingface.co/datasets/MCPToolBench/MCPToolBenchPP)|[ModelScope](https://www.modelscope.cn/datasets/mcptoolbench/MCPToolBenchPP)
